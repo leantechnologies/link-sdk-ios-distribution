@@ -36,7 +36,7 @@ class ViewController: UIViewController {
 }
 ```
 
-### Method
+### Methods
 
 The LinkSDK has **4 methods** to connect and manage your customer's Accounts, Data and Payments.
 
