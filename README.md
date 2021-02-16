@@ -46,28 +46,57 @@ Please ensure that you pass in the root view controller that the SDK is being in
 `.link()` allows your customer to connect their bank account to your platform
 
 ```
-leanSDK.link(appToken: "YOUR_APP_ID", appUserID: "some_user_id", permissions: [.accounts,.balance,.identity,.transactions], showLogs: true, sandbox: true, rootController: self)
+leanSDK.link(
+    appToken: "YOUR_APP_ID", 
+    appUserID: "some_user_id", 
+    permissions: [.accounts,.balance,.identity,.transactions], 
+    showLogs: true, 
+    sandbox: true, 
+    rootController: self
+)
 ```
 
 #### .reconnect()
 `.reconnect()` allows you to reconnect and entity - when you make a call to the Data API that requires reconnection - you will receieve a `reconnect_id` for this flow.
 
 ```
-leanSDK.reconnect(reconnectID: "4a2107d3-3bbd-410c-a92d-b0d43d782454", appToken: "YOUR_APP_ID", successURL: "myapp://myapp.com/success", failURL: "myapp://myapp.com/success", sandbox: true, showLogs: true, rootController: self)
+leanSDK.reconnect(
+    reconnectID: "4a2107d3-3bbd-410c-a92d-b0d43d782454", 
+    appToken: "YOUR_APP_ID", 
+    successURL: "myapp://myapp.com/success", 
+    failURL: "myapp://myapp.com/success", 
+    sandbox: true, 
+    showLogs: true, 
+    rootController: self
+)
 ```
 
 #### .createPaymentSource()
 Create a payment source from your customer's bank account.
 
 ```
-leanSDK.createPaymentSource(customerID: "3d42bb66-d12c-41f8-83f9-110016dd6a09", appToken: "YOUR_APP_ID", successURL: "myapp://myapp.com/success", failURL: "myapp://myapp.com/success", showLogs: true ,rootController: self)
+leanSDK.createPaymentSource(
+    customerID: "3d42bb66-d12c-41f8-83f9-110016dd6a09", 
+    appToken: "YOUR_APP_ID", 
+    successURL: "myapp://myapp.com/success", 
+    failURL: "myapp://myapp.com/success", 
+    showLogs: true,
+    rootController: self
+)
 ```
 
 #### .pay()
 Initiate a payment from a customer's bank account.
 
 ```
-leanSDK.pay(appToken: "YOUR_APP_ID", paymentIntentID: "a2b01c69-c436-4a84-b950-11fb3914c5b8", failURL:  "myapp://myapp.com/success", successURL:  "myapp://myapp.com/success", showLogs: true ,rootController: self)
+leanSDK.pay(
+    appToken: "YOUR_APP_ID", 
+    paymentIntentID: "a2b01c69-c436-4a84-b950-11fb3914c5b8", 
+    failURL:  "myapp://myapp.com/success", 
+    successURL:  "myapp://myapp.com/success", 
+    showLogs: true,
+    rootController: self
+)
 ```
 
 You can read more in depth documentation by going to our [API Documentation](https://docs.leantech.me)
