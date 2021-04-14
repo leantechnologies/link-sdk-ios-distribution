@@ -117,7 +117,7 @@ The LinkSDK has **4 methods** to connect and manage your customer's Accounts, Da
 Each of these methods is available through `Lean.manager.{METHOD}()`
 
 #### .link()
-`.link()` allows your customer to connect their bank account to your platform
+`.link()` allows your customer to connect their bank account for the **Data** API - allowing you to access accounts, balances and transactions. To link an account for Payments, see the createPaymentSource() Method.
 
 ```
 Lean.manager.link(
