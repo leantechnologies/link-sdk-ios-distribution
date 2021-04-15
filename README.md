@@ -67,18 +67,20 @@ struct ContentView: View {
     .fullScreenCover(isPresented: $isPresented, content: {
         Lean.manager.view.ignoresSafeArea()
     })
-}
 
-func handleLink() {
+    func handleLink() {
     Lean.manager
             .link(customerId: "CUSTOMER_ID", permissions: linkPermissions, success: {
                 print("Entity Linked")
                 isPresented = false
-            }, error: {
-                print("Unable to Link")
+            }, error: { (status) in
+                print(status.status)
+                print(status.message)
+                print(status.method)
                 isPresented = false
             })
     isPresented = true
+}
 }
 ```
 
@@ -104,8 +106,9 @@ class ViewController: UIViewController {
     @IBAction func handleLink(_sender: Any) {
         Lean.manager.link(presentingViewController: self, customerId: "CUSTOMER_ID", permissions: linkPermissions) {
             print("Entity Linked")
-        } error: {
-            print("Unable to Link")
+        } error: { (status) in
+            print(status.status)
+            print(status.message)
         }
     }
 ```
@@ -126,7 +129,7 @@ Lean.manager.link(
     permissions: ArrayOf LeanPermissions,
     bankId: bankId? 
     success: {... executes code on success },
-    error: {... executes code on failure }
+    error: { (status) in ... executes code on failure }
 )
 ```
 
@@ -144,7 +147,7 @@ Lean.manager.reconnect(
     presentingViewController: self, 
     reconnectId: reconnectId, 
     success: {... executes code on success },
-    error: {... executes code on failure }
+    error: { (status) in ... executes code on failure }
 )
 ```
 
@@ -157,7 +160,7 @@ Lean.manager.createPaymentSource(
     customerId: customerId, 
     bankId: bankId?, 
     success: {... executes code on success },
-    error: {... executes code on failure }
+    error: { (status) in ... executes code on failure }
 )
 ```
 
@@ -168,9 +171,9 @@ Initiate a payment from a customer's bank account.
 Lean.manager.pay(
     presentingViewController: self, 
     paymentIntentId: paymentIntentId,
-    accountId: accountId, 
+    accountId: accountId?, 
     success: {... executes code on success },
-    error: {... executes code on failure }
+    error: { (status) in ... executes code on failure }
 )
 ```
 
