@@ -63,10 +63,10 @@ struct ContentView: View {
         VStack {
             Button("Link", action: { handleLink() })
         }
+        .fullScreenCover(isPresented: $isPresented, content: {
+            Lean.manager.view.ignoresSafeArea()
+        })
     }
-    .fullScreenCover(isPresented: $isPresented, content: {
-        Lean.manager.view.ignoresSafeArea()
-    })
 
     func handleLink() {
     Lean.manager
