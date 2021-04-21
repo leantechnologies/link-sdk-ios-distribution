@@ -34,7 +34,8 @@ class LeanTestAppApp: App {
     required init() {
         Lean.manager.setup(
             appToken: "YOUR_APP_TOKEN",
-            sandbox: true
+            sandbox: true,
+            version: "1.3.2"
         )
     }
     
@@ -84,6 +85,16 @@ struct ContentView: View {
 }
 ```
 
+### Setting the version
+
+Version takes a `String` and can point to either a specific SDK version i.e. "1.3.2" or an alias i.e. "latest".
+
+We recommend passing in a specific version to ensure stability in the case that a change to the SDK breaks your application.
+
+`latest` is subject to change at relatively short notice - but does allow for any bugfixes to shipped over the air - meaning fixes can be applied without the need to resubmit your application to the app store.
+
+A QA version of the SDK is available with `next-release` and should only be used in test applications to ensure that the next `latest` patch will not break your implementation of the LinkSDK.
+
 ## Usage with View Controllers
 
 When using LinkSDK with standard MVC swift - you must initialize the SDK and provide the SDK with a View Controller to present itself inside.
@@ -100,7 +111,7 @@ class ViewController: UIViewController {
 
     override func ViewDidLoad() {
         super.viewDidLoad()
-        Lean.manager.setup(appToken: "YOUR_APP_TOKEN", sandbox: true)
+        Lean.manager.setup(appToken: "YOUR_APP_TOKEN", sandbox: true, version: "1.3.2")
     }
 }
     @IBAction func handleLink(_sender: Any) {
@@ -113,7 +124,17 @@ class ViewController: UIViewController {
     }
 ```
 
-### Methods
+### Setting the version
+
+Version takes a `String` and can point to either a specific SDK version i.e. "1.3.2" or an alias i.e. "latest".
+
+We recommend passing in a specific version to ensure stability in the case that a change to the SDK breaks your application.
+
+`latest` is subject to change at relatively short notice - but does allow for any bugfixes to shipped over the air - meaning fixes can be applied without the need to resubmit your application to the app store.
+
+A QA version of the SDK is available with `next-release` and should only be used in test applications to ensure that the next `latest` patch will not break your implementation of the LinkSDK.
+
+## Methods
 
 The LinkSDK has **4 methods** to connect and manage your customer's Accounts, Data and Payments.
 
@@ -176,5 +197,24 @@ Lean.manager.pay(
     error: { (status) in ... executes code on failure }
 )
 ```
+
+## Responses
+
+Success responses will allow you to execute code upon the success of the LinkSDK flow you have called.
+
+Error responses return a `struct` with the following details:
+
+```
+struct LeanStatus {
+    method: String,
+    status: String,
+    message: String
+}
+```
+| Attribute     | Description                                                                                                                                                               |
+| ------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| method      | The method called by the SDK, can be `LINK`, `RECONNECT`, `CREATE_PAYMENT_SOURCE` or `PAY`                       |
+| status        | The end status of the call, can be `ERROR` or `CANCELLED` - if cancelled this means the user exited the flow.       |
+| message    | Further details on the reason for the error, or where the user exited the flow.                                                        |
 
 You can read more in depth documentation by going to our [API Documentation](https://docs.leantech.me)
