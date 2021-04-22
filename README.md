@@ -76,7 +76,7 @@ struct ContentView: View {
                 isPresented = false
             }, error: { (status) in
                 print(status.status)
-                print(status.message)
+                print(status.message!)
                 print(status.method)
                 isPresented = false
             })
@@ -119,7 +119,7 @@ class ViewController: UIViewController {
             print("Entity Linked")
         } error: { (status) in
             print(status.status)
-            print(status.message)
+            print(status.message!)
         }
     }
 ```
@@ -208,13 +208,15 @@ Error responses return a `struct` with the following details:
 struct LeanStatus {
     method: String,
     status: String,
-    message: String
+    message: String?,
+    lastApiResponse: String?
 }
 ```
 | Attribute     | Description                                                                                                                                                               |
 | ------------- | ----------------------------------------------------------------------------------------------------------------------------- |
 | method      | The method called by the SDK, can be `LINK`, `RECONNECT`, `CREATE_PAYMENT_SOURCE` or `PAY`                       |
 | status        | The end status of the call, can be `ERROR` or `CANCELLED` - if cancelled this means the user exited the flow.       |
-| message    | Further details on the reason for the error, or where the user exited the flow.                                                        |
+| message    | Further details on the reason for the error, or where the user exited the flow. This is an optional.                         |
+| lastApiResponse    | The last API response status recieved from Lean. This is an optional.                                                       |
 
 You can read more in depth documentation by going to our [API Documentation](https://docs.leantech.me)
