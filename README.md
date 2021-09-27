@@ -87,7 +87,7 @@ struct ContentView: View {
 
 ### Setting the version
 
-Version takes a `String` and can point to either a specific SDK version i.e. "1.3.2" or an alias i.e. "latest".
+Version takes a `String` and can point to either a specific SDK version i.e. "1.14.4" or an alias i.e. "latest".
 
 We recommend passing in a specific version to ensure stability in the case that a change to the SDK breaks your application.
 
@@ -198,6 +198,28 @@ Lean.manager.pay(
 )
 ```
 
+#### .connect()
+Connect a bank account and create an `Entity` for the Data API and a `Payment Source` for the Payment API with a single sign on.
+
+```
+Lean.manager.connect(
+    presentingViewController: self: UIViewController, 
+    customerId: "CUSTOMER_ID", 
+    permissions: ArrayOf LeanPermissions,
+    bankId: bankId?
+    paymentDestinationId: paymentDestinationId?
+    success: {... executes code on success },
+    error: { (status) in ... executes code on failure }
+)
+```
+
+LeanPermissions are an array of ENUMs available through the LeanSDK package. Available values are:
+* LeanPermissions.Identity
+* LeanPermissions.Accounts
+* LeanPermission.Transactions
+* LeanPermission.Balance
+* LeanPermission.Payments
+
 ## Responses
 
 Success responses will allow you to execute code upon the success of the LinkSDK flow you have called.
@@ -209,7 +231,13 @@ struct LeanStatus {
     method: String,
     status: String,
     message: String?,
-    lastApiResponse: String?
+    lastApiResponse: String?,
+    exitPoint: String?,
+    secondaryStatus: String?,
+    bankDetails: {
+      bankIdentifier: String?,
+      isSupported: Bool?
+    }
 }
 ```
 | Attribute     | Description                                                                                                                                                               |
@@ -218,5 +246,9 @@ struct LeanStatus {
 | status        | The end status of the call, can be `ERROR` or `CANCELLED` - if cancelled this means the user exited the flow.       |
 | message    | Further details on the reason for the error, or where the user exited the flow. This is an optional.                         |
 | lastApiResponse    | The last API response status recieved from Lean. This is an optional.                                                       |
+| exitPoint | The last screen shown before the user closed the SDK |
+| secondaryStatus | More details on the main status - for example INVALID_CREDENTIALS |
+| bankDetails.bankIdentifier | The ID of the selected bank |
+| bankDetails.isSupported | Whether the selected bank is supported or not |
 
 You can read more in depth documentation by going to our [API Documentation](https://docs.leantech.me)
