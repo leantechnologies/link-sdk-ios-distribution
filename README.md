@@ -49,7 +49,7 @@ class LeanTestAppApp: App {
 }
 ```
 
-In Swift UI you must set up a `Lean.manager.view` for your further calls to populate into - in the example below you can see how to use `Lean.manager` to make a `link` call.
+In Swift UI you must set up a `LeanView` for your further calls to populate into. You can do this with `Lean.manager.generateView()` - in the example below you can see how to use `Lean.manager` to make a `link` call.
 
 ```
 // ContentView.swift
@@ -67,7 +67,7 @@ struct ContentView: View {
             Button("Link", action: { handleLink() })
         }
         .fullScreenCover(isPresented: $isPresented, content: {
-            Lean.manager.view.ignoresSafeArea()
+            Lean.manager.generateView().ignoresSafeArea()
         })
     }
 
