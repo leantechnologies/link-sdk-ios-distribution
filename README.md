@@ -71,8 +71,10 @@ struct ContentView: View {
 
     func handleLink() {
     Lean.manager
-            .link(customerId: "CUSTOMER_ID", permissions: linkPermissions, success: {
+            .link(customerId: "CUSTOMER_ID", permissions: linkPermissions, 
+            success: { (status) in
                 print("Entity Linked")
+                print(status.status)
                 isPresented = false
             }, error: { (status) in
                 print(status.status)
@@ -114,13 +116,12 @@ class ViewController: UIViewController {
         Lean.manager.setup(appToken: "YOUR_APP_TOKEN", sandbox: true, version: "1.3.2")
     }
 }
-    @IBAction func handleLink(_sender: Any) {
-        Lean.manager.link(presentingViewController: self, customerId: "CUSTOMER_ID", permissions: linkPermissions) {
+        @IBAction func handleLink(_ sender: Any) {
+        Lean.manager.link(presentingViewController: self, customerId: CUSTOMER_ID, permissions: linkPermissions, bankId: nil, success: { status in
             print("Entity Linked")
-        } error: { (status) in
+        }, error: { status in
             print(status.status)
-            print(status.message!)
-        }
+        })
     }
 ```
 
@@ -149,7 +150,7 @@ Lean.manager.link(
     customerId: "CUSTOMER_ID", 
     permissions: ArrayOf LeanPermissions,
     bankId: bankId? 
-    success: {... executes code on success },
+    success: { (status) in ... executes code on success },
     error: { (status) in ... executes code on failure }
 )
 ```
@@ -167,7 +168,7 @@ LeanPermissions are an array of ENUMs available through the LeanSDK package. Ava
 Lean.manager.reconnect(
     presentingViewController: self, 
     reconnectId: reconnectId, 
-    success: {... executes code on success },
+    success: { (status) in ... executes code on success },
     error: { (status) in ... executes code on failure }
 )
 ```
@@ -180,7 +181,7 @@ Lean.manager.createPaymentSource(
     presentingViewController: self, 
     customerId: customerId, 
     bankId: bankId?, 
-    success: {... executes code on success },
+    success: { (status) in ... executes code on success },
     error: { (status) in ... executes code on failure }
 )
 ```
@@ -193,7 +194,7 @@ Lean.manager.pay(
     presentingViewController: self, 
     paymentIntentId: paymentIntentId,
     accountId: accountId?, 
-    success: {... executes code on success },
+    success: { (status) in ... executes code on success },
     error: { (status) in ... executes code on failure }
 )
 ```
@@ -208,7 +209,7 @@ Lean.manager.connect(
     permissions: ArrayOf LeanPermissions,
     bankId: bankId?
     paymentDestinationId: paymentDestinationId?
-    success: {... executes code on success },
+    success: { (status) in ... executes code on success },
     error: { (status) in ... executes code on failure }
 )
 ```
