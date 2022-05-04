@@ -120,7 +120,7 @@ class ViewController: UIViewController {
     }
 }
         @IBAction func handleLink(_ sender: Any) {
-        Lean.manager.link(presentingViewController: self, customerId: CUSTOMER_ID, permissions: linkPermissions, bankId: nil?, success: { status in
+        Lean.manager.link(presentingViewController: self, customerId: CUSTOMER_ID, permissions: linkPermissions, bankId: nil, success: { status in
             print("Entity Linked")
         }, error: { status in
             print(status.status)
