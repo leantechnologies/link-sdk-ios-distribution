@@ -269,7 +269,6 @@ You can customize the UI of LinkSDK using `LeanCustomization`.
 
 Colors should be provided as valid CSS color formats - color name, HEX, RGB, RBGA (comma separated)
 
-
 ```
 var customConfig = LeanCustomization(
     themeColor: String?, 
@@ -287,3 +286,12 @@ Lean.manager.link(
    )
 
 ```
+
+### Accepted color strings
+
+| Type | Value |
+|------|-------|
+| Name | `"blue"` |
+| Hex  | `"#0000ff"` |
+| RGB  | `"rgb(0,0,255)"` |
+| RGBA | `"rgba(0,0,0,255,0.5)"` |
