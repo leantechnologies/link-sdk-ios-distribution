@@ -263,7 +263,7 @@ struct LeanStatus {
 You can read more in depth documentation by going to our [API Documentation](https://docs.leantech.me)
 
 
-## Customization
+## Customization
 
 You can customize the UI of LinkSDK using `LeanCustomization`.
 
