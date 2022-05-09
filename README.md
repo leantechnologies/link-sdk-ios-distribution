@@ -73,7 +73,8 @@ struct ContentView: View {
 
     func handleLink() {
     Lean.manager
-            .link(customerId: "CUSTOMER_ID", permissions: linkPermissions, 
+            .link(customerId: String, permissions: linkPermissions, 
+            customization: LeanCustomization?,
             success: { (status) in
                 print("Entity Linked")
                 print(status.status)
@@ -139,7 +140,7 @@ A QA version of the SDK is available with `next-release` and should only be used
 
 ## Methods
 
-The LinkSDK has **4 methods** to connect and manage your customer's Accounts, Data and Payments.
+The LinkSDK has **5 methods** to connect and manage your customer's Accounts, Data and Payments.
 
 Each of these methods is available through `Lean.manager.{METHOD}()`
 
@@ -149,9 +150,10 @@ Each of these methods is available through `Lean.manager.{METHOD}()`
 ```
 Lean.manager.link(
     presentingViewController: self: UIViewController, 
-    customerId: "CUSTOMER_ID", 
-    permissions: ArrayOf LeanPermissions,
+    customerId: String, 
+    permissions: Array<LeanPermissions>,
     bankId: bankId? 
+    customization: LeanCustomization?,
     success: { (status) in ... executes code on success },
     error: { (status) in ... executes code on failure }
 )
@@ -170,6 +172,7 @@ LeanPermissions are an array of ENUMs available through the LeanSDK package. Ava
 Lean.manager.reconnect(
     presentingViewController: self, 
     reconnectId: reconnectId, 
+    customization: LeanCustomization?,
     success: { (status) in ... executes code on success },
     error: { (status) in ... executes code on failure }
 )
@@ -183,6 +186,7 @@ Lean.manager.createPaymentSource(
     presentingViewController: self, 
     customerId: customerId, 
     bankId: bankId?, 
+    customization: LeanCustomization?,
     success: { (status) in ... executes code on success },
     error: { (status) in ... executes code on failure }
 )
@@ -196,6 +200,7 @@ Lean.manager.pay(
     presentingViewController: self, 
     paymentIntentId: paymentIntentId,
     accountId: accountId?, 
+    customization: LeanCustomization?,
     success: { (status) in ... executes code on success },
     error: { (status) in ... executes code on failure }
 )
@@ -207,10 +212,11 @@ Connect a bank account and create an `Entity` for the Data API and a `Payment So
 ```
 Lean.manager.connect(
     presentingViewController: self: UIViewController, 
-    customerId: "CUSTOMER_ID", 
-    permissions: ArrayOf LeanPermissions,
+    customerId: String, 
+    permissions: Array<LeanPermissions>,
     bankId: bankId?
     paymentDestinationId: paymentDestinationId?
+    customization: LeanCustomization?,
     success: { (status) in ... executes code on success },
     error: { (status) in ... executes code on failure }
 )
@@ -255,3 +261,37 @@ struct LeanStatus {
 | bankDetails.isSupported | Whether the selected bank is supported or not |
 
 You can read more in depth documentation by going to our [API Documentation](https://docs.leantech.me)
+
+
+## Customization
+
+You can customize the UI of LinkSDK using `LeanCustomization`.
+
+Colors should be provided as valid CSS color formats - color name, HEX, RGB, RBGA (comma separated)
+
+```
+var customConfig = LeanCustomization(
+    themeColor: String?, 
+    buttonTextColor: String?, 
+    linkColor: String?, 
+    overlayColor: String?
+)
+```
+
+```
+Lean.manager.link(
+...
+    customization: customConfig,
+...
+   )
+
+```
+
+### Accepted color strings
+
+| Type | Value |
+|------|-------|
+| Name | `"blue"` |
+| Hex  | `"#0000ff"` |
+| RGB  | `"rgb(0,0,255)"` |
+| RGBA | `"rgba(0,0,0,255,0.5)"` |
