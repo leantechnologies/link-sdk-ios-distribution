@@ -12,11 +12,15 @@ To connect this repository to your project via [Swift Package Manager](https://s
 
 Please note: You must have github connected to XCode for SPM to work.
 
+<br/>
+
 ### Manually
 
-You can download the `LeanSDK.xcframework` file manually [here](https://cdn.leantech.me/link/sdk/ios/1.0.4/LeanSDK.xcframework-1.0.4.zip).
+You can download the `LeanSDK.xcframework` file manually [here](https://cdn.leantech.me/link/sdk/ios/1.5.0/LeanSDK.xcframework-1.5.0.zip).
 
 You can then add it to your project the same way you would with any other framework dependency.
+
+<br/>
 
 ## Usage with Swift UI
 
@@ -37,8 +41,7 @@ class LeanTestAppApp: App {
         Lean.manager.setup(
             appToken: "YOUR_APP_TOKEN",
             sandbox: true,
-            version: "1.24.0",
-            language: nil
+            version: "1.25.0"
         )
     }
 
@@ -91,9 +94,11 @@ struct ContentView: View {
 }
 ```
 
+<br/>
+
 ### Setting the version
 
-Version takes a `String` and can point to either a specific SDK version i.e. `"1.24.0"` or an alias i.e. `"latest"`.
+`version` takes a `String` and can point to either a specific SDK version i.e. `"1.25.0"` or an alias i.e. `"latest"`.
 
 We recommend passing in a specific version to ensure stability in the case that a change to the SDK breaks your application.
 
@@ -101,11 +106,41 @@ We recommend passing in a specific version to ensure stability in the case that 
 
 A QA version of the SDK is available with `next-release` and should only be used in test applications to ensure that the next `latest` patch will not break your implementation of the LinkSDK.
 
+<br/>
+
 ### Setting the language
 
 `language` is set in `Lean.manager.setup`. It is optional and defaults to `nil`, in which case it will default to English.
 
 If you wish to provide a value you can provide a `String` either `"en"` for English, `"ar"` for Arabic.
+
+Example:
+
+```
+Lean.manager.setup(
+    ...
+    language: "ar"
+)
+```
+
+<br/>
+
+### Setting the country
+
+In most cases you don't need to set a country, but if you're operating in KSA you may need to. Speak with our integrations team if you're not sure.
+
+`country` is set in `Lean.manager.setup`. It is optional and defaults to `nil`, in which case no specific country is set.
+
+Example:
+
+```
+Lean.manager.setup(
+    ...
+    country: LeanCountry.SaudiArabia
+)
+```
+
+<br/>
 
 ## Usage with View Controllers
 
@@ -123,7 +158,11 @@ class ViewController: UIViewController {
 
     override func ViewDidLoad() {
         super.viewDidLoad()
-        Lean.manager.setup(appToken: "YOUR_APP_TOKEN", sandbox: true, version: "1.3.2")
+        Lean.manager.setup(
+            appToken: "YOUR_APP_TOKEN",
+            sandbox: true,
+            version: "1.25.0",
+        )
     }
 }
         @IBAction func handleLink(_ sender: Any) {
@@ -135,11 +174,15 @@ class ViewController: UIViewController {
     }
 ```
 
+<br/>
+
 ## Methods
 
 The LinkSDK has **5 methods** to connect and manage your customer's Accounts, Data and Payments.
 
 Each of these methods is available through `Lean.manager.{METHOD}()`
+
+<br/>
 
 #### .link()
 
@@ -164,6 +207,8 @@ LeanPermissions are an array of ENUMs available through the LeanSDK package. Ava
 - LeanPermission.Transactions
 - LeanPermission.Balance
 
+<br/>
+
 #### .reconnect()
 
 `.reconnect()` allows you to reconnect and entity - when you make a call to the Data API that requires reconnection - you will receieve a `reconnect_id` for this flow.
@@ -177,6 +222,8 @@ Lean.manager.reconnect(
     error: { (status) in ... executes code on failure }
 )
 ```
+
+<br/>
 
 #### .createPaymentSource()
 
@@ -193,6 +240,8 @@ Lean.manager.createPaymentSource(
 )
 ```
 
+<br/>
+
 #### .pay()
 
 Initiate a payment from a customer's bank account.
@@ -207,6 +256,8 @@ Lean.manager.pay(
     error: { (status) in ... executes code on failure }
 )
 ```
+
+<br/>
 
 #### .connect()
 
@@ -232,6 +283,8 @@ LeanPermissions are an array of ENUMs available through the LeanSDK package. Ava
 - LeanPermission.Transactions
 - LeanPermission.Balance
 - LeanPermission.Payments
+
+<br/>
 
 ## Responses
 
@@ -267,6 +320,26 @@ struct LeanStatus {
 
 You can read more in depth documentation by going to our [API Documentation](https://docs.leantech.me)
 
+<br/>
+
+## Open banking
+
+In order to show Open Banking enabled banks to the end user you must provide `failRedirectUrl` and `successRedirectUrl` to each relevant method initialisation call.
+
+For example
+
+```
+Lean.manager.link(
+...
+    failRedirectUrl: String?,
+    successRedirectUrl: String?
+...
+   )
+
+```
+
+<br/>
+
 ## Customization
 
 You can customize the UI of LinkSDK using `LeanCustomization`.
@@ -292,6 +365,8 @@ Lean.manager.link(
    )
 
 ```
+
+<br/>
 
 ### Accepted color strings
 
