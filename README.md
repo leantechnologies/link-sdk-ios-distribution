@@ -1,6 +1,6 @@
 # LeanSDK
 
-**This SDK supports iOS 13+ and requires XCode 12.5.X and above**
+**This SDK supports iOS 11+ and requires XCode 12.5.X and above**
 
 Lean's Link iOS SDK is a framework, distributed as a binary xcframework for simulators and iPhone devices, used by developers to let their end users connect their bank accounts through a series of easy steps in a friendly UI.
 
