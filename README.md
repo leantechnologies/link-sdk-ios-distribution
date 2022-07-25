@@ -242,6 +242,24 @@ Lean.manager.createPaymentSource(
 
 <br/>
 
+#### .updatePaymentSource()
+
+The updatePaymentSource method is used to authorize an additional payment destination for an existing payment source in the Payments API.
+
+```
+Lean.manager.updatePaymentSource(
+    presentingViewController: self,
+    customerId: customerId,
+    paymentSourceId: paymentSourceId,
+    paymentDestinationId: paymentDestinationId,
+    customization: LeanCustomization?,
+    success: { (status) in ... executes code on success },
+    error: { (status) in ... executes code on failure }
+)
+```
+
+<br/>
+
 #### .pay()
 
 Initiate a payment from a customer's bank account.
