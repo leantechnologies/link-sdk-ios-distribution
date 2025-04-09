@@ -16,6 +16,6 @@ let package = Package(
         // .package(url: /* package url */, from: "1.0.0"),
     ],
     targets: [
-        .binaryTarget(name: "LeanSDK", url: "https://cdn.leantech.me/link/sdk/ios/build.14/LeanSDK.xcframework-build.14.zip", checksum: "f22046a167bbfb48ba1915804b446b2f06d0c78096d8aa7643f89225e9a70b14")
+        .binaryTarget(name: "LeanSDK", url: "https://cdn.leantech.me/link/sdk/ios/build.15/LeanSDK.xcframework-build.15.zip", checksum: "e1c34b01bf5d5a9210654ea849f15607c451e585b78ce3fc21fbe8712f3f3d92")
     ]
 )
