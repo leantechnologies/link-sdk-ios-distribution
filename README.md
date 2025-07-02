@@ -330,7 +330,7 @@ struct LeanStatus {
 | method                     | The method called by the SDK, can be `LINK`, `RECONNECT`, `CREATE_PAYMENT_SOURCE` or `PAY`                    |
 | status                     | The end status of the call, can be `ERROR` or `CANCELLED` - if cancelled this means the user exited the flow. |
 | message                    | Further details on the reason for the error, or where the user exited the flow. This is an optional.          |
-| lastApiResponse            | The last API response status recieved from Lean. This is an optional.                                         |
+| lastApiResponse            | The last API response status received from Lean. This is an optional.                                         |
 | exitPoint                  | The last screen shown before the user closed the SDK                                                          |
 | secondaryStatus            | More details on the main status - for example INVALID_CREDENTIALS                                             |
 | bankDetails.bankIdentifier | The ID of the selected bank                                                                                   |
