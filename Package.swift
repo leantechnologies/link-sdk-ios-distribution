@@ -3,6 +3,9 @@
 
 import PackageDescription
 
+let buildNumber = "22"
+let checksum = "b4dccd25aab22a66a5fe12ab7c06f73d033924609252877ac4dc944b0d5aa02a"
+
 let package = Package(
     name: "LeanSDK",
     products: [
@@ -16,6 +19,10 @@ let package = Package(
         // .package(url: /* package url */, from: "1.0.0"),
     ],
     targets: [
-        .binaryTarget(name: "LeanSDK", url: "https://cdn.leantech.me/link/sdk/ios/build.22/LeanSDK.xcframework-build.22.zip", checksum: "b4dccd25aab22a66a5fe12ab7c06f73d033924609252877ac4dc944b0d5aa02a")
+        .binaryTarget(
+            name: "LeanSDK",
+            url: "https://cdn.leantech.me/link/sdk/ios/build.\(buildNumber)/LeanSDK.xcframework-build.\(buildNumber).zip",
+            checksum: checksum
+        )
     ]
 )
