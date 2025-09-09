@@ -3,8 +3,8 @@
 
 import PackageDescription
 
-let buildNumber = "23"
-let checksum = "262a201c6132605274f89e9945a46c64e8d5660da3384891b26ebd76f0accc7a"
+let buildNumber = "25"
+let checksum = "d2fc2b1a9a642ee20805bfbc557eddc40fef5fee33da5779e02888fba9bd464a"
 
 let package = Package(
     name: "LeanSDK",
