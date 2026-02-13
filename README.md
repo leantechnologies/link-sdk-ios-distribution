@@ -16,7 +16,7 @@ Please note: You must have github connected to XCode for SPM to work.
 
 ### Manually
 
-You can download the `LeanSDK.xcframework` file manually [here](https://cdn.leantech.me/link/sdk/ios/1.5.0/LeanSDK.xcframework-1.5.0.zip).
+You can download the `LeanSDK.xcframework` file manually [here](https://cdn.leantech.me/link/sdk/ios/build.32/LeanSDK.xcframework-build.32.zip).
 
 You can then add it to your project the same way you would with any other framework dependency.
 
